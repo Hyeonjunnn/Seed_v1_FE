@@ -1,76 +1,54 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { fetchBoards } from '../api/boardApi';
+import useAuthStore from '../store/authStore';
 
 const Home = () => {
-  const { data, isLoading, error } = useQuery({
-    queryKey: ['boards', 1],
-    queryFn: () => fetchBoards(0, 10, 'boardNo,DESC', 1),
-  });
-
-  if (isLoading)
-    return <div className="p-4 text-center text-gray-600">게시글 목록을 불러오는 중입니다...</div>;
-
-  if (error)
-    return <div className="p-4 text-center text-red-500">게시글 불러오기 중 오류가 발생했습니다.</div>;
-
-  const boards = data?.content || [];
+  const { isLoggedIn, userName, logout } = useAuthStore();
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      {/* 네비게이션 */}
-      <header className="bg-white shadow">
-        <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-          <h1 className="text-3xl font-extrabold text-indigo-700">Seed Board</h1>
-          <ul className="flex space-x-6 text-gray-700 font-medium">
-            <li>
-              <Link to="/" className="hover:text-indigo-600 transition-colors">
-                홈
-              </Link>
-            </li>
-            <li>
-              <Link to="/write" className="hover:text-indigo-600 transition-colors">
-                글쓰기
-              </Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
 
-      {/* 게시글 목록 */}
-      <main className="flex-grow container mx-auto px-6 py-10">
-        <h2 className="text-4xl font-extrabold text-gray-900 mb-10 text-center">게시판</h2>
+      {/* 소개 섹션 */}
+      <main className="flex-grow container mx-auto px-6 py-16 flex flex-col items-center text-center">
+        <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
+          Seed Board에 오신 것을 환영합니다
+        </h2>
+        <p className="text-lg text-gray-700 max-w-3xl mb-12">
+          Seed Board는 간단하고 직관적인 게시판 서비스입니다. 회원가입 후 자유롭게 글을 작성하고, 다른 사용자들과 소통하세요.
+          게시판을 통해 최신 소식 공유, 질문과 답변, 커뮤니티 활동까지 모두 가능합니다.
+        </p>
 
-        <ul className="max-w-4xl mx-auto space-y-5">
-          {boards.length > 0 ? (
-            boards.map((board) => (
-              <li
-                key={board.boardNo}
-                className="bg-white rounded-lg shadow-md p-5 hover:shadow-lg transition cursor-pointer"
-              >
-                <Link to={`/board/${board.boardNo}`} className="text-indigo-700 font-semibold text-2xl">
-                  {board.title}
-                </Link>
-                <div className="text-gray-500 mt-2 flex justify-between text-sm">
-                  <span>작성자: {board.userName}</span>
-                  <span>{board.createdAt?.slice(0, 10)}</span>
-                </div>
-                {board.content && (
-                  <p className="text-gray-600 mt-3 line-clamp-3">{board.content}</p>
-                )}
-              </li>
-            ))
-          ) : (
-            <p className="text-center text-gray-500">아직 등록된 게시글이 없습니다.</p>
-          )}
-        </ul>
+        <div className="flex space-x-8 max-w-4xl w-full justify-center">
+          <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
+            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">쉽고 빠른 글쓰기</h3>
+            <p className="text-gray-600">
+              로그인 후 누구나 간편하게 글을 작성하고 관리할 수 있습니다.
+            </p>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
+            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">실시간 소통</h3>
+            <p className="text-gray-600">
+              다른 사용자들과 댓글과 피드백을 주고받으며 활발한 커뮤니케이션이 가능합니다.
+            </p>
+          </div>
+          <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
+            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">언제 어디서나</h3>
+            <p className="text-gray-600">
+              반응형 웹 디자인으로 PC, 태블릿, 모바일 어디서든 편리하게 이용할 수 있습니다.
+            </p>
+          </div>
+        </div>
+
+        {!isLoggedIn && (
+          <Link
+            to="/signup"
+            className="mt-12 inline-block bg-indigo-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-indigo-700 transition"
+          >
+            지금 회원가입 하기
+          </Link>
+        )}
       </main>
 
-      {/* 푸터 */}
-      <footer className="bg-gray-100 py-6 text-center text-gray-500 text-sm">
-        © {new Date().getFullYear()} Seed Board. All rights reserved.
-      </footer>
     </div>
   );
 };

@@ -1,17 +1,13 @@
-import axios from 'axios';
+import api from './axiosInstance';
 
-const api = axios.create({
-  baseURL: process.env.REACT_APP_BASE_URL,
-  // headers: { Authorization: 'Bearer token' }, // 필요시
-});
-
-export const fetchBoards = async (page = 0, size = 10, sort = 'boardNo,DESC', boardCategoryNo = 1) => {
-  const res = await api.get(`/board?page=${page}&size=${size}&sort=${sort}&boardCategoryNo=${boardCategoryNo}`);
+export const fetchBoards = async (page = 0, size = 10, sort = 'boardNo,DESC', boardCategoryNo = 1, boardTitle = '') => {
+  const res = await api.get(`/board?page=${page}&size=${size}&sort=${sort}&boardCategoryNo=${boardCategoryNo}&boardTitle=${boardTitle}`);
+  
   return res.data;
 };
 
-export const fetchBoard = async (id) => {
-  const res = await api.get(`/board/${id}`);
+export const fetchBoard = async (boardNo) => {
+  const res = await api.get(`/board/${boardNo}`);
   return res.data;
 };
 
@@ -20,11 +16,11 @@ export const createBoard = async (data) => {
   return res.data;
 };
 
-export const updateBoard = async (id, data) => {
-  const res = await api.put(`/board/${id}`, data);
+export const updateBoard = async (boardNo, data) => {
+  const res = await api.put(`/board/${boardNo}`, data);
   return res.data;
 };
 
-export const deleteBoard = async (id) => {
-  await api.delete(`/board/${id}`);
+export const deleteBoard = async (boardNo) => {
+  await api.delete(`/board/${boardNo}`);
 };
