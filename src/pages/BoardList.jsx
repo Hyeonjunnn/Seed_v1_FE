@@ -4,6 +4,12 @@ import { useQuery } from '@tanstack/react-query';
 import { fetchBoards } from '../api/boardApi';
 import useAuthStore from '../store/authStore';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+// Day.js 플러그인 적용
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const BoardList = () => {
   const { user } = useAuthStore();
@@ -91,7 +97,7 @@ const BoardList = () => {
                 <p className="text-gray-600 line-clamp-2 mb-4">{board.content}</p>
                 <div className="text-gray-500 flex justify-between text-sm">
                   <span>{board.userName}</span>
-                  <span>{dayjs(board.createdAt).format('YYYY-MM-DD')}</span>
+                  <span>{dayjs(board.createdAt).tz('Asia/Seoul').format('YYYY-MM-DD HH:mm')}</span>
                 </div>
               </li>
             ))}
