@@ -7,7 +7,6 @@ import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
 import timezone from 'dayjs/plugin/timezone';
 
-// Day.js 플러그인 적용
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
@@ -22,6 +21,7 @@ const BoardList = () => {
   const { data, isLoading, error } = useQuery({
     queryKey: ['boards', boardTitle, sort],
     queryFn: () => fetchBoards(0, 10, sort, 1, boardTitle),
+    keepPreviousData: true,
   });
 
   const boards = data?.content || [];
@@ -30,15 +30,24 @@ const BoardList = () => {
     e.preventDefault();
   };
 
+  const formatDate = (utcDate) => {
+    if (!utcDate) return '-';
+    return dayjs(utcDate).tz('Asia/Seoul').format('YYYY-MM-DD HH:mm');
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <main className="flex-grow container mx-auto px-6 py-10">
+        {/* 제목 */}
         <div className="mb-8 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900">게시판 목록</h2>
         </div>
 
+        {/* 검색 & 정렬 + 글쓰기 버튼 */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-10">
+          {/* 검색 & 정렬 */}
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 w-full">
+            {/* 검색 */}
             <form onSubmit={handleSearch} className="flex w-full sm:w-96 shadow-sm">
               <input
                 type="text"
@@ -55,6 +64,7 @@ const BoardList = () => {
               </button>
             </form>
 
+            {/* 정렬 */}
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
@@ -65,6 +75,7 @@ const BoardList = () => {
             </select>
           </div>
 
+          {/* 글쓰기 버튼 */}
           {isLoggedIn && (
             <button
               onClick={() => navigate('/write')}
@@ -75,6 +86,7 @@ const BoardList = () => {
           )}
         </div>
 
+        {/* 게시글 목록 */}
         {isLoading ? (
           <div className="p-4 text-center text-gray-600">게시글 목록을 불러오는 중입니다...</div>
         ) : error ? (
@@ -97,7 +109,7 @@ const BoardList = () => {
                 <p className="text-gray-600 line-clamp-2 mb-4">{board.content}</p>
                 <div className="text-gray-500 flex justify-between text-sm">
                   <span>{board.userName}</span>
-                  <span>{dayjs(board.createdAt).tz('Asia/Seoul').format('YYYY-MM-DD HH:mm')}</span>
+                  <span>{formatDate(board.createdAt)}</span>
                 </div>
               </li>
             ))}
