@@ -2,6 +2,7 @@ export const projects = [
     {
         no: 1,
         name: 'ERP 시스템 웹 전환',
+        type: '경력',
         description: '전자정부프레임워크 기반 ERP를 Spring Boot로 전환',
         techStack: ['Java', 'Spring Boot', 'MySQL', 'Redis', 'AWS'],
         details: '기존 PowerBuilder ERP 시스템을 웹으로 전환, 더존 ERP 연동 기능 구현.'
@@ -9,6 +10,7 @@ export const projects = [
     {
         no: 2,
         name: '프로젝트 관리 플랫폼',
+        type: '팀 프로젝트',
         description: 'React + Spring Boot + PostgreSQL 기반의 프로젝트 관리 웹 앱',
         githubLinks: [
             { name: 'Frontend', url: 'https://github.com/Hyeonjunnn/Seed_v1_FE' },
@@ -21,6 +23,7 @@ export const projects = [
     {
         no: 3,
         name: 'B2B 구독 관리 시스템',
+        type: '팀 프로젝트',
         description: 'OTT 기업을 위한 구독 분석 및 이탈 예측 시스템',
         githubLinks: [
             { name: 'Frontend', url: 'https://github.com/Hyeonjunnn/Seed_v1_FE' },
@@ -33,6 +36,7 @@ export const projects = [
     {
         no: 4,
         name: 'Seed 프로젝트',
+        type: '개인 프로젝트',
         description: 'React + Spring Boot 기반 프로젝트 관리 플랫폼',
         githubLinks: [
             { name: 'Frontend', url: 'https://github.com/Hyeonjunnn/Seed_v1_FE' },

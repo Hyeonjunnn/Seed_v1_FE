@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../store/authStore';
 
 const Logout = () => {
   const navigate = useNavigate();
+  const logout = useAuthStore((state) => state.logout);
 
   useEffect(() => {
-    // TODO: 로그아웃 API 호출 또는 토큰 제거 처리
-    localStorage.removeItem('token'); // 예시로 토큰 제거
+    logout();
     navigate('/');
-  }, [navigate]);
+  }, [logout, navigate]);
 
   return null;
 };

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
 const Home = () => {
-  const { isLoggedIn, userName, logout } = useAuthStore();
+  const { isLoggedIn } = useAuthStore();
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -20,19 +20,19 @@ const Home = () => {
 
         <div className="flex space-x-8 max-w-4xl w-full justify-center">
           <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
-            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">쉽고 빠른 글쓰기</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-primary-700">쉽고 빠른 글쓰기</h3>
             <p className="text-gray-600">
               로그인 후 누구나 간편하게 글을 작성하고 관리할 수 있습니다.
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
-            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">실시간 소통</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-primary-700">실시간 소통</h3>
             <p className="text-gray-600">
               다른 사용자들과 댓글과 피드백을 주고받으며 활발한 커뮤니케이션이 가능합니다.
             </p>
           </div>
           <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
-            <h3 className="text-2xl font-semibold mb-4 text-indigo-700">언제 어디서나</h3>
+            <h3 className="text-2xl font-semibold mb-4 text-primary-700">언제 어디서나</h3>
             <p className="text-gray-600">
               반응형 웹 디자인으로 PC, 태블릿, 모바일 어디서든 편리하게 이용할 수 있습니다.
             </p>
@@ -42,7 +42,7 @@ const Home = () => {
         {!isLoggedIn && (
           <Link
             to="/signup"
-            className="mt-12 inline-block bg-indigo-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-indigo-700 transition"
+            className="mt-12 inline-block bg-primary-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-primary-700 transition"
           >
             지금 회원가입 하기
           </Link>

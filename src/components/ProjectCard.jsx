@@ -9,7 +9,14 @@ const ProjectCard = ({ project }) => {
       className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg hover:scale-105 transition-transform flex flex-col cursor-pointer"
     >
       {/* 제목 */}
-      <h3 className="text-xl font-semibold text-indigo-700 mb-3">{project.name}</h3>
+      <h3 className="text-xl font-semibold text-gray-900 mb-1">{project.name}</h3>
+
+      {/* 프로젝트 유형 */}
+      {project.type && (
+        <h4 className="text-sm font-medium text-indigo-500 mb-3">
+          {project.type}
+        </h4>
+      )}
 
       {/* 설명 */}
       <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>

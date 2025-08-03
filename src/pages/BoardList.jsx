@@ -54,11 +54,11 @@ const BoardList = () => {
                 value={boardTitle}
                 onChange={(e) => setBoardTitle(e.target.value)}
                 placeholder="제목 검색"
-                className="w-full border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="w-full border border-gray-300 rounded-l-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               />
               <button
                 type="submit"
-                className="bg-indigo-600 text-white min-w-[80px] px-6 py-2 rounded-r-md hover:bg-indigo-700 transition text-base font-medium flex items-center justify-center"
+                className="bg-primary-600 text-white min-w-[80px] px-6 py-2 rounded-r-md hover:bg-primary-700 transition text-base font-medium flex items-center justify-center"
               >
                 검색
               </button>
@@ -68,7 +68,7 @@ const BoardList = () => {
             <select
               value={sort}
               onChange={(e) => setSort(e.target.value)}
-              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 h-[42px]"
+              className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500 h-[42px]"
             >
               <option value="boardNo,DESC">최신순</option>
               <option value="boardNo,ASC">오래된순</option>
@@ -79,7 +79,7 @@ const BoardList = () => {
           {isLoggedIn && (
             <button
               onClick={() => navigate('/write')}
-              className="mt-4 md:mt-0 bg-indigo-600 text-white px-6 py-2 w-[160px] whitespace-nowrap text-center rounded-md font-semibold hover:bg-indigo-700 transition"
+              className="mt-4 md:mt-0 bg-primary-600 text-white px-6 py-2 w-[160px] whitespace-nowrap text-center rounded-md font-semibold hover:bg-primary-700 transition"
             >
               게시글 작성
             </button>
@@ -102,7 +102,7 @@ const BoardList = () => {
               >
                 <Link
                   to={`/board/${board.boardNo}`}
-                  className="text-indigo-700 font-semibold text-xl block mb-3"
+                  className="text-primary-700 font-semibold text-xl block mb-3"
                 >
                   {board.title}
                 </Link>

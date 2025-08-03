@@ -8,13 +8,14 @@ const TechStackIcons = ({ stack, limit, showLabel = false, size = 24 }) => {
     <div className="flex gap-2 flex-wrap">
       {limitedStack.map((tech) => {
         const Icon = techIcons[tech];
+        const color = brandColors[tech] || '#16a34a';
         return Icon ? (
           <div key={tech} className="flex items-center gap-1">
-            <Icon size={size} color={brandColors[tech]} />
-            {showLabel && <span className="text-sm text-gray-700">{tech}</span>}
+            <Icon size={size} color={color} />
+            {showLabel && <span className="text-sm text-primary-700">{tech}</span>}
           </div>
         ) : (
-          <span key={tech}>{tech}</span>
+          <span key={tech} className="text-primary-700">{tech}</span>
         );
       })}
     </div>

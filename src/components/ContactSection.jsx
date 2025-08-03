@@ -9,7 +9,7 @@ const ContactSection = () => {
   return (
     <section className="bg-white py-16 px-6 w-full">
       <div className="max-w-4xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-6 text-gray-900">연락처</h2>
+        <h2 className="text-3xl font-bold mb-10 text-gray-900">연락처</h2>
         <div className="space-y-4 inline-block text-left">
           {[
             {
@@ -34,7 +34,7 @@ const ContactSection = () => {
             <div key={index} className="flex items-center gap-4">
               {/* 아이콘 영역 */}
               <div className="w-6 flex justify-center">
-                <Icon className="text-indigo-600" size={22} />
+                <Icon className="text-primary-600" size={22} />
               </div>
               {/* 라벨 + 값 */}
               <div className="flex gap-2">
@@ -44,7 +44,7 @@ const ContactSection = () => {
                     href={link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-indigo-600 hover:underline"
+                    className="text-primary-600 hover:underline"
                   >
                     {value}
                   </a>

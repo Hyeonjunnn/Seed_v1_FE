@@ -7,7 +7,7 @@ import ContactSection from '../components/ContactSection';
 
 const Portfolio = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-primary-50 min-h-screen">
       <HeroSection />
       <AboutMe />
       <SkillsSection />

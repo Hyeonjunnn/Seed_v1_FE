@@ -18,8 +18,8 @@ const Header = () => {
   return (
     <header className="bg-white shadow">
       <nav className="container mx-auto px-6 py-4 flex justify-between items-center">
-        <h1 className="text-3xl font-extrabold text-indigo-700">
-          <Link to="/" className="hover:text-indigo-600 transition-colors">
+        <h1 className="text-3xl font-extrabold text-primary-700">
+          <Link to="/" className="hover:text-primary-600 transition-colors">
             Seed
           </Link>
         </h1>
@@ -31,7 +31,9 @@ const Header = () => {
                 <Link
                   to={path}
                   className={`transition-colors ${
-                    isActive ? 'text-indigo-600 font-semibold border-b-2 border-indigo-600' : 'hover:text-indigo-600'
+                    isActive
+                      ? 'text-primary-600 font-semibold border-b-2 border-primary-600'
+                      : 'hover:text-primary-600'
                   }`}
                 >
                   {label}
@@ -42,11 +44,11 @@ const Header = () => {
 
           {isLoggedIn ? (
             <>
-              <li className="text-indigo-600 font-semibold">{userName}</li>
+              <li className="text-primary-600 font-semibold">{userName}</li>
               <li>
                 <button
                   onClick={logout}
-                  className="hover:text-indigo-600 transition-colors bg-transparent border-none cursor-pointer"
+                  className="hover:text-primary-600 transition-colors bg-transparent border-none cursor-pointer"
                 >
                   로그아웃
                 </button>
@@ -59,8 +61,8 @@ const Header = () => {
                   to="/login"
                   className={`transition-colors ${
                     location.pathname === '/login'
-                      ? 'text-indigo-600 font-semibold border-b-2 border-indigo-600'
-                      : 'hover:text-indigo-600'
+                      ? 'text-primary-600 font-semibold border-b-2 border-primary-600'
+                      : 'hover:text-primary-600'
                   }`}
                 >
                   로그인
@@ -71,8 +73,8 @@ const Header = () => {
                   to="/signup"
                   className={`transition-colors ${
                     location.pathname === '/signup'
-                      ? 'text-indigo-600 font-semibold border-b-2 border-indigo-600'
-                      : 'hover:text-indigo-600'
+                      ? 'text-primary-600 font-semibold border-b-2 border-primary-600'
+                      : 'hover:text-primary-600'
                   }`}
                 >
                   회원가입

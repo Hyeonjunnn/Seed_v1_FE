@@ -66,7 +66,7 @@ const BoardWrite = () => {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col items-center py-10 px-4">
       <div className="w-full max-w-3xl bg-white p-8 rounded-xl shadow-lg">
-        <h2 className="text-3xl font-extrabold text-indigo-700 mb-6 text-center">
+        <h2 className="text-3xl font-extrabold text-primary-700 mb-6 text-center">
           게시글 작성
         </h2>
         <form onSubmit={handleSubmit} className="space-y-6">
@@ -79,7 +79,7 @@ const BoardWrite = () => {
               id="title"
               value={title}
               onChange={(e) => setTitle(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="제목을 입력하세요"
               required
             />
@@ -93,7 +93,7 @@ const BoardWrite = () => {
               id="category"
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
             >
               {categories.map((cat) => (
                 <option key={cat.id || cat.boardCategoryNo} value={cat.id || cat.boardCategoryNo}>
@@ -112,7 +112,7 @@ const BoardWrite = () => {
               value={content}
               onChange={(e) => setContent(e.target.value)}
               rows="10"
-              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-gray-300 rounded-md px-4 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               placeholder="내용을 입력하세요"
               required
             />
@@ -128,7 +128,7 @@ const BoardWrite = () => {
             </button>
             <button
               type="submit"
-              className="bg-indigo-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-indigo-700 transition"
+              className="bg-primary-600 text-white px-6 py-2 rounded-md font-semibold hover:bg-primary-700 transition"
             >
               등록
             </button>

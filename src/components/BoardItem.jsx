@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 
 const BoardItem = ({ board }) => {
   return (
-    <li>
-      <Link to={`/boards/${board.id}`}>
-        <h3>{board.title}</h3>
+    <li className="bg-white rounded-md shadow p-4 mb-4 hover:shadow-lg transition">
+      <Link to={`/boards/${board.id}`} className="text-primary-700 font-semibold text-lg hover:underline">
+        {board.title}
       </Link>
-      <p>작성자: {board.author}</p>
+      <p className="text-gray-600 mt-1">작성자: {board.author}</p>
     </li>
   );
 };

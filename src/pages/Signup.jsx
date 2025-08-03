@@ -28,9 +28,9 @@ const Signup = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-primary-50 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
-        <h2 className="text-3xl font-extrabold text-indigo-700 mb-6 text-center">회원가입</h2>
+        <h2 className="text-3xl font-extrabold text-primary-700 mb-6 text-center">회원가입</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
             <label htmlFor="email" className="block text-gray-700 font-medium mb-1">
@@ -39,7 +39,7 @@ const Signup = () => {
             <input
               type="email"
               id="email"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
@@ -53,7 +53,7 @@ const Signup = () => {
             <input
               type="text"
               id="name"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               value={name}
               onChange={(e) => setName(e.target.value)}
               required
@@ -67,7 +67,7 @@ const Signup = () => {
             <input
               type="password"
               id="password"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
@@ -81,7 +81,7 @@ const Signup = () => {
             <input
               type="password"
               id="passwordConfirm"
-              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-primary-500"
               value={passwordConfirm}
               onChange={(e) => setPasswordConfirm(e.target.value)}
               required
@@ -90,14 +90,14 @@ const Signup = () => {
           </div>
           <button
             type="submit"
-            className="w-full bg-indigo-600 text-white py-3 rounded-md font-semibold hover:bg-indigo-700 transition"
+            className="w-full bg-primary-600 text-white py-3 rounded-md font-semibold hover:bg-primary-700 transition"
           >
             회원가입
           </button>
         </form>
         <p className="mt-4 text-center text-gray-600">
           이미 계정이 있으신가요?{' '}
-          <Link to="/login" className="text-indigo-600 hover:underline">
+          <Link to="/login" className="text-primary-600 hover:underline">
             로그인
           </Link>
         </p>

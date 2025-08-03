@@ -9,7 +9,7 @@ const ProjectsSection = () => {
       <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
         {projects
           .sort((a, b) => b.no - a.no)
-          .slice(0, 6) // 홈 화면에서는 6개만 보여줄 수도 있음
+          .slice(0, 6)
           .map((project) => (
             <ProjectCard key={project.no} project={project} />
           ))}

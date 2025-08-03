@@ -3,7 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import { projects } from '../data/projects';
 import { techIcons, brandColors } from '../utils/techIcons';
 
-const PortfolioDetail = () => {
+const ProjectDetail = () => {
   const { no } = useParams();
   const project = projects.find((p) => p.no === parseInt(no));
 
@@ -104,4 +104,4 @@ const PortfolioDetail = () => {
   );
 };
 
-export default PortfolioDetail;
+export default ProjectDetail;
