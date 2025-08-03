@@ -2,9 +2,11 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchBoard } from '../api/boardApi';
+import useAuthStore from '../store/authStore';
 
 const BoardDetail = () => {
   const { no } = useParams();
+  const { user } = useAuthStore(); // 로그인한 사용자 정보 가져오기
 
   // React Query로 데이터 가져오기
   const { data: board, isLoading, error } = useQuery({
@@ -37,6 +39,9 @@ const BoardDetail = () => {
     );
   }
 
+  // 이메일로 비교
+  const canEdit = user && board.userEmail === user.email;
+
   return (
     <div className="min-h-screen bg-primary-50 py-12 px-6">
       <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md hover:shadow-lg transition p-8">
@@ -60,12 +65,14 @@ const BoardDetail = () => {
           >
             ← 게시판 목록으로
           </Link>
-          <Link
-            to={`/edit/${no}`}
-            className="px-5 py-2 bg-primary-600 text-white rounded-md font-semibold hover:bg-primary-700 transition"
-          >
-            수정하기
-          </Link>
+          {canEdit && (
+            <Link
+              to={`/edit/${no}`}
+              className="px-5 py-2 bg-primary-600 text-white rounded-md font-semibold hover:bg-primary-700 transition"
+            >
+              수정하기
+            </Link>
+          )}
         </div>
       </div>
     </div>
