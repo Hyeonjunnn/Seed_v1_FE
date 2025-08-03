@@ -23,7 +23,7 @@ const SkillsSection = () => {
           return (
             <div
               key={tech}
-              className="flex flex-col items-center justify-center gap-2 p-4 bg-indigo-50 rounded-lg w-28 h-28 text-center" // ✅ h-28 추가, justify-center로 세로 중앙 정렬
+              className="flex flex-col items-center justify-center gap-2 p-4 bg-indigo-50 rounded-lg w-28 h-28 text-center"
             >
               {Icon && <Icon size={36} className="text-indigo-600" />}
               <span className="text-indigo-700 font-semibold break-words">{tech}</span>

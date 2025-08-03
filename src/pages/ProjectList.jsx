@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { projects } from '../data/projects';
-import { techIcons, brandColors } from '../data/techIcons';
+import { techIcons, brandColors } from '../utils/techIcons';
 
 const Portfolio = () => {
   return (
@@ -44,7 +44,7 @@ const Portfolio = () => {
               </div>
 
               <Link
-                to={`/portfolio/${project.no}`}
+                to={`/project/${project.no}`}
                 className="text-indigo-600 hover:underline font-medium"
               >
                 상세보기 →

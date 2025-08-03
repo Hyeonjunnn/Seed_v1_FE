@@ -1,5 +1,5 @@
 import React from 'react';
-import { techIcons, brandColors } from '../data/techIcons';
+import { techIcons, brandColors } from '../utils/techIcons';
 
 const TechStackIcons = ({ stack, limit, showLabel = false, size = 24 }) => {
   const limitedStack = limit ? stack.slice(0, limit) : stack;

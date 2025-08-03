@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { projects } from '../data/projects';
-import { techIcons, brandColors } from '../data/techIcons';
+import { techIcons, brandColors } from '../utils/techIcons';
 
 const PortfolioDetail = () => {
   const { no } = useParams();
