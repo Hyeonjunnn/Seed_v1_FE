@@ -36,7 +36,7 @@ const BoardList = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-primary-50 flex flex-col">
       <main className="flex-grow container mx-auto px-6 py-10">
         {/* 제목 */}
         <div className="mb-8 text-center">

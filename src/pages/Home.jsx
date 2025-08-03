@@ -6,7 +6,7 @@ const Home = () => {
   const { isLoggedIn } = useAuthStore();
 
   return (
-    <div className="min-h-screen bg-gray-50 flex flex-col">
+    <div className="min-h-screen bg-primary-50 flex flex-col">
 
       {/* 소개 섹션 */}
       <main className="flex-grow container mx-auto px-6 py-16 flex flex-col items-center text-center">

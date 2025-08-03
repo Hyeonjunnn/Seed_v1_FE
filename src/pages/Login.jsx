@@ -26,7 +26,7 @@ const Login = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-primary-50 px-4">
       <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-lg">
         <h2 className="text-3xl font-extrabold text-primary-700 mb-6 text-center">로그인</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
