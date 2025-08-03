@@ -3,12 +3,17 @@ import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchBoard } from '../api/boardApi';
 import useAuthStore from '../store/authStore';
+import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import timezone from 'dayjs/plugin/timezone';
+
+dayjs.extend(utc);
+dayjs.extend(timezone);
 
 const BoardDetail = () => {
   const { no } = useParams();
-  const { user } = useAuthStore(); // 로그인한 사용자 정보 가져오기
+  const { user } = useAuthStore();
 
-  // React Query로 데이터 가져오기
   const { data: board, isLoading, error } = useQuery({
     queryKey: ['board', no],
     queryFn: () => fetchBoard(no),
@@ -16,59 +21,53 @@ const BoardDetail = () => {
   });
 
   if (isLoading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-gray-500">
-        게시글을 불러오는 중입니다...
-      </div>
-    );
+    return <div className="text-center py-10 text-gray-600">게시글 불러오는 중...</div>;
   }
 
   if (error) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-red-500">
-        게시글을 불러오는 중 오류가 발생했습니다.
-      </div>
-    );
+    return <div className="text-center py-10 text-red-500">오류가 발생했습니다.</div>;
   }
 
   if (!board) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-gray-500">
-        게시글이 존재하지 않습니다.
-      </div>
-    );
+    return <div className="text-center py-10 text-gray-600">게시글이 없습니다.</div>;
   }
 
-  // 이메일로 비교
   const canEdit = user && board.userEmail === user.email;
+
+  const formatDate = (date) => {
+    if (!date) return '-';
+    return dayjs(date).tz('Asia/Seoul').format('YYYY-MM-DD HH:mm');
+  };
 
   return (
     <div className="min-h-screen bg-primary-50 py-12 px-6">
-      <div className="max-w-3xl mx-auto bg-white rounded-xl shadow-md hover:shadow-lg transition p-8">
+      <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
         {/* 제목 */}
-        <h1 className="text-3xl font-extrabold text-gray-900 mb-4">{board.title}</h1>
+        <h1 className="text-3xl font-bold text-gray-900 mb-2">{board.title}</h1>
+
+        {/* 카테고리 */}
+        <div className="text-sm text-primary-600 font-medium mb-4">
+          {board.boardCategoryName || `카테고리 #${board.boardCategoryNo}`}
+        </div>
 
         {/* 작성자 & 날짜 */}
         <div className="flex justify-between text-sm text-gray-500 mb-6">
           <span>{board.userName}</span>
-          <span>{board.createdAt}</span>
+          <span>{formatDate(board.createdAt)}</span>
         </div>
 
         {/* 본문 */}
         <div className="text-gray-700 leading-relaxed mb-8">{board.content}</div>
 
         {/* 버튼 영역 */}
-        <div className="flex justify-between items-center border-t pt-6">
-          <Link
-            to="/boards"
-            className="text-primary-600 hover:text-primary-700 font-medium transition"
-          >
-            ← 게시판 목록으로
+        <div className="flex justify-between border-t pt-6">
+          <Link to="/boards" className="text-primary-600 hover:underline">
+            ← 목록으로
           </Link>
           {canEdit && (
             <Link
               to={`/edit/${no}`}
-              className="px-5 py-2 bg-primary-600 text-white rounded-md font-semibold hover:bg-primary-700 transition"
+              className="bg-primary-600 text-white px-5 py-2 rounded-md hover:bg-primary-700 transition"
             >
               수정하기
             </Link>

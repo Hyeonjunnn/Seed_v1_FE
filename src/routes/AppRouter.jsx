@@ -6,7 +6,8 @@ import Signup from '../pages/Signup';
 import Logout from '../pages/Logout';
 import BoardList from '../pages/BoardList';
 import BoardDetail from '../pages/BoardDetail';
-import BoardWrite from '../pages/BoardWrite';
+import BoardCreate from '../pages/BoardCreate';
+import BoardEdit from '../pages/BoardEdit';
 import Portfolio from '../pages/Portfolio';
 import ProjectList from '../pages/ProjectList';
 import ProjectDetail from '../pages/ProjectDetail';
@@ -16,8 +17,8 @@ const AppRouter = () => (
     <Route path="/" element={<Home />} />
     <Route path="/boards" element={<BoardList />} />
     <Route path="/board/:no" element={<BoardDetail />} />
-    <Route path="/write" element={<BoardWrite />} />
-    <Route path="/edit/:id" element={<BoardWrite />} />
+    <Route path="/write" element={<BoardCreate />} />
+    <Route path="/edit/:no" element={<BoardEdit />} />
     <Route path="/login" element={<Login />} />
     <Route path="/signup" element={<Signup />} />
     <Route path="/logout" element={<Logout />} />

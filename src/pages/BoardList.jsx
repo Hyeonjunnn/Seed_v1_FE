@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { fetchBoards } from '../api/boardApi';
+import { fetchBoardCategories } from '../api/boardCategoryApi';
 import useAuthStore from '../store/authStore';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc';
@@ -17,10 +18,18 @@ const BoardList = () => {
 
   const [boardTitle, setBoardTitle] = useState('');
   const [sort, setSort] = useState('boardNo,DESC');
+  const [selectedCategory, setSelectedCategory] = useState(1); // 기본값: 자유게시판(1)
 
+  // 카테고리 목록 가져오기
+  const { data: categories, isLoading: isCategoryLoading } = useQuery({
+    queryKey: ['boardCategories'],
+    queryFn: fetchBoardCategories,
+  });
+
+  // 게시글 목록 가져오기
   const { data, isLoading, error } = useQuery({
-    queryKey: ['boards', boardTitle, sort],
-    queryFn: () => fetchBoards(0, 10, sort, 1, boardTitle),
+    queryKey: ['boards', boardTitle, sort, selectedCategory],
+    queryFn: () => fetchBoards(0, 10, sort, selectedCategory, boardTitle),
     keepPreviousData: true,
   });
 
@@ -41,6 +50,27 @@ const BoardList = () => {
         {/* 제목 */}
         <div className="mb-8 text-center">
           <h2 className="text-4xl font-extrabold text-gray-900">게시판 목록</h2>
+        </div>
+
+        {/* 카테고리 필터 */}
+        <div className="mb-6 flex flex-wrap gap-3 justify-center">
+          {isCategoryLoading ? (
+            <span className="text-gray-500">카테고리 불러오는 중...</span>
+          ) : (
+            categories?.map((category) => (
+              <button
+                key={category.boardCategoryNo}
+                onClick={() => setSelectedCategory(category.boardCategoryNo)}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+                  selectedCategory === category.boardCategoryNo
+                    ? 'bg-primary-600 text-white border-primary-600'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                }`}
+              >
+                {category.name}
+              </button>
+            ))
+          )}
         </div>
 
         {/* 검색 & 정렬 + 글쓰기 버튼 */}
@@ -98,14 +128,12 @@ const BoardList = () => {
             {boards.map((board) => (
               <li
                 key={board.boardNo}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition"
+                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition cursor-pointer"
+                onClick={() => navigate(`/board/${board.boardNo}`)}
               >
-                <Link
-                  to={`/board/${board.boardNo}`}
-                  className="text-primary-700 font-semibold text-xl block mb-3"
-                >
+                <h3 className="text-primary-700 font-semibold text-xl mb-3">
                   {board.title}
-                </Link>
+                </h3>
                 <p className="text-gray-600 line-clamp-2 mb-4">{board.content}</p>
                 <div className="text-gray-500 flex justify-between text-sm">
                   <span>{board.userName}</span>
