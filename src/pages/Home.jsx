@@ -1,54 +1,87 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import useAuthStore from '../store/authStore';
+import { categorizedSkills, techIcons } from '../data/skillsData';
 
 const Home = () => {
-  const { isLoggedIn } = useAuthStore();
+  const allSkills = Array.from(new Set(Object.values(categorizedSkills).flat()));
+
+  const repeatedSkills = [...allSkills, ...allSkills];
 
   return (
-    <div className="min-h-screen bg-primary-50 flex flex-col">
-
-      {/* 소개 섹션 */}
-      <main className="flex-grow container mx-auto px-6 py-16 flex flex-col items-center text-center">
-        <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
-          Seed에 오신 것을 환영합니다
-        </h2>
-        <p className="text-lg text-gray-700 max-w-3xl mb-12">
-          Seed Board는 간단하고 직관적인 게시판 서비스입니다. 회원가입 후 자유롭게 글을 작성하고, 다른 사용자들과 소통하세요.
-          게시판을 통해 최신 소식 공유, 질문과 답변, 커뮤니티 활동까지 모두 가능합니다.
+    <div className="min-h-screen bg-primary-50 text-gray-800">
+      {/* 헤더 인사 */}
+      <header className="bg-primary-600 text-white py-24 px-6 text-center">
+        <h1 className="text-4xl font-bold mb-4">저의 사이트에 방문해주셔서 감사합니다!</h1>
+        <p className="text-lg max-w-xl mx-auto">
+          송현준의 포트폴리오 사이트에 오신 것을 환영합니다.<br />
+          여기서 저의 경험과 프로젝트를 확인하실 수 있습니다.
         </p>
+      </header>
 
-        <div className="flex space-x-8 max-w-4xl w-full justify-center">
-          <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
-            <h3 className="text-2xl font-semibold mb-4 text-primary-700">쉽고 빠른 글쓰기</h3>
-            <p className="text-gray-600">
-              로그인 후 누구나 간편하게 글을 작성하고 관리할 수 있습니다.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
-            <h3 className="text-2xl font-semibold mb-4 text-primary-700">실시간 소통</h3>
-            <p className="text-gray-600">
-              다른 사용자들과 댓글과 피드백을 주고받으며 활발한 커뮤니케이션이 가능합니다.
-            </p>
-          </div>
-          <div className="bg-white rounded-lg shadow-lg p-8 flex-1 hover:shadow-xl transition cursor-default">
-            <h3 className="text-2xl font-semibold mb-4 text-primary-700">언제 어디서나</h3>
-            <p className="text-gray-600">
-              반응형 웹 디자인으로 PC, 태블릿, 모바일 어디서든 편리하게 이용할 수 있습니다.
-            </p>
+      {/* 자기소개 섹션 */}
+      <section className="py-20 px-6 max-w-4xl mx-auto">
+        <h2 className="text-3xl font-semibold mb-6 text-primary-700">안녕하세요, 저는 송현준입니다.</h2>
+        <p className="text-lg leading-relaxed">
+          저는 웹 개발자이며, 백엔드와 프론트엔드를 넘나들며<br />
+          효율적이고 유지보수하기 좋은 코드를 작성하는 것을 목표로 합니다.<br />
+          Java, Spring Boot, React를 주로 사용하고 있으며,<br />
+          팀 협업과 클린 코드에 가치를 두고 있습니다.
+        </p>
+      </section>
+
+      {/* 기술 스택 - 슬라이드 효과 + 아이콘 */}
+      <section className="bg-primary-100 py-20 px-6 overflow-hidden">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl font-semibold mb-8 text-primary-700 text-center">기술 스택</h2>
+          <div className="relative w-full overflow-hidden">
+            <div
+              className="flex whitespace-nowrap"
+              style={{
+                animation: 'slideLeft 20s linear infinite',
+              }}
+            >
+              {repeatedSkills.map((tech, idx) => {
+                const Icon = techIcons[tech];
+                return (
+                  <span
+                    key={idx}
+                    className="inline-flex items-center px-5 py-3 bg-white rounded-full shadow text-primary-700 font-medium mr-6 select-none"
+                    style={{ gap: 6 }}
+                  >
+                    {Icon && <Icon size={20} className="text-primary-700" />}
+                    {tech}
+                  </span>
+                );
+              })}
+            </div>
           </div>
         </div>
+      </section>
 
-        {!isLoggedIn && (
-          <Link
-            to="/signup"
-            className="mt-12 inline-block bg-primary-600 text-white px-8 py-3 rounded-md text-lg font-semibold hover:bg-primary-700 transition"
-          >
-            지금 회원가입 하기
-          </Link>
-        )}
-      </main>
+      {/* 연락 섹션 */}
+      <section className="py-20 px-6 max-w-4xl mx-auto text-center">
+        <h2 className="text-3xl font-semibold mb-6 text-primary-700">함께 이야기해요</h2>
+        <p className="mb-8 text-lg">
+          궁금한 점이나 협업 문의는 언제든 연락 주세요.
+        </p>
+        <a
+          href="mailto:dev_sklg0602@naver.com"
+          className="inline-block bg-primary-700 text-white px-8 py-3 rounded-lg font-semibold hover:bg-primary-800 transition"
+        >
+          이메일 보내기
+        </a>
+      </section>
 
+      {/* 슬라이드 애니메이션 keyframes 인라인 스타일 */}
+      <style>{`
+        @keyframes slideLeft {
+          0% {
+            transform: translateX(0);
+          }
+          100% {
+            transform: translateX(-50%);
+          }
+        }
+      `}</style>
     </div>
   );
 };
