@@ -11,7 +11,7 @@ const Home = () => {
       {/* 소개 섹션 */}
       <main className="flex-grow container mx-auto px-6 py-16 flex flex-col items-center text-center">
         <h2 className="text-5xl font-extrabold text-gray-900 mb-6">
-          Seed Board에 오신 것을 환영합니다
+          Seed에 오신 것을 환영합니다
         </h2>
         <p className="text-lg text-gray-700 max-w-3xl mb-12">
           Seed Board는 간단하고 직관적인 게시판 서비스입니다. 회원가입 후 자유롭게 글을 작성하고, 다른 사용자들과 소통하세요.

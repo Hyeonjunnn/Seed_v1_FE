@@ -1,11 +1,19 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
 const Header = () => {
   const { user, logout } = useAuthStore();
   const isLoggedIn = !!user;
   const userName = user?.userName || '';
+  const location = useLocation();
+
+  const navLinks = [
+    { path: '/', label: '홈' },
+    { path: '/boards', label: '게시판' },
+    { path: '/portfolio', label: '포트폴리오' },
+    { path: '/project', label: '프로젝트' },
+  ];
 
   return (
     <header className="bg-white shadow">
@@ -16,16 +24,22 @@ const Header = () => {
           </Link>
         </h1>
         <ul className="flex space-x-6 text-gray-700 font-medium">
-          <li>
-            <Link to="/" className="hover:text-indigo-600 transition-colors">
-              홈
-            </Link>
-          </li>
-          <li>
-            <Link to="/boards" className="hover:text-indigo-600 transition-colors">
-              게시판
-            </Link>
-          </li>
+          {navLinks.map(({ path, label }) => {
+            const isActive = location.pathname === path;
+            return (
+              <li key={path}>
+                <Link
+                  to={path}
+                  className={`transition-colors ${
+                    isActive ? 'text-indigo-600 font-semibold border-b-2 border-indigo-600' : 'hover:text-indigo-600'
+                  }`}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
+
           {isLoggedIn ? (
             <>
               <li className="text-indigo-600 font-semibold">{userName}</li>
@@ -41,12 +55,26 @@ const Header = () => {
           ) : (
             <>
               <li>
-                <Link to="/login" className="hover:text-indigo-600 transition-colors">
+                <Link
+                  to="/login"
+                  className={`transition-colors ${
+                    location.pathname === '/login'
+                      ? 'text-indigo-600 font-semibold border-b-2 border-indigo-600'
+                      : 'hover:text-indigo-600'
+                  }`}
+                >
                   로그인
                 </Link>
               </li>
               <li>
-                <Link to="/signup" className="hover:text-indigo-600 transition-colors">
+                <Link
+                  to="/signup"
+                  className={`transition-colors ${
+                    location.pathname === '/signup'
+                      ? 'text-indigo-600 font-semibold border-b-2 border-indigo-600'
+                      : 'hover:text-indigo-600'
+                  }`}
+                >
                   회원가입
                 </Link>
               </li>
