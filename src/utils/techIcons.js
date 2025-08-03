@@ -1,6 +1,9 @@
-import { FaReact, FaJava, FaPython, FaDocker } from 'react-icons/fa';
 import { HiOutlineMail } from 'react-icons/hi';
 import { FaGithub, FaTumblr } from 'react-icons/fa';
+
+import {
+    FaJava
+} from 'react-icons/fa';
 
 import {
     SiReact,
@@ -25,7 +28,6 @@ export const techIcons = {
     Spring: SiSpring,
     'Spring Boot': SiSpringboot,
     AWS: SiAmazonwebservices,
-    PostgreSQL: SiPostgresql,
     MySQL: SiMysql,
     Docker: SiDocker,
     Kubernetes: SiKubernetes,
