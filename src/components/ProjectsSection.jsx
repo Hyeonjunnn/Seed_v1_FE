@@ -20,7 +20,7 @@ const ProjectsSection = () => {
 
               <div className="flex items-center gap-2 mb-4 flex-wrap">
                 {project.techStack.length <= 5 ? (
-                  // ✅ 5개 이하 → 전부 표시
+                  // 5개 이하 → 전부 표시
                   project.techStack.map((tech, index) => {
                     const Icon = techIcons[tech];
                     const color = brandColors[tech] || '#6B7280';
@@ -41,7 +41,7 @@ const ProjectsSection = () => {
                   })
                 ) : (
                   <>
-                    {/* ✅ 기본 3개 */}
+                    {/* 기본 3개 */}
                     {project.techStack.slice(0, 3).map((tech, index) => {
                       const Icon = techIcons[tech];
                       const color = brandColors[tech] || '#6B7280';
@@ -61,7 +61,7 @@ const ProjectsSection = () => {
                       );
                     })}
 
-                    {/* ✅ +N 버튼 (툴팁 포함) */}
+                    {/* +N 버튼 (툴팁 포함) */}
                     <div className="relative group">
                       <span className="text-gray-500 text-xs cursor-pointer">+{project.techStack.length - 3}</span>
                       
