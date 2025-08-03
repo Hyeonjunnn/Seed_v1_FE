@@ -1,11 +1,11 @@
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home';
-import Detail from '../pages/Detail';
 import Login from '../pages/Login';
 import Signup from '../pages/Signup';
 import Logout from '../pages/Logout';
 import BoardList from '../pages/BoardList';
+import BoardDetail from '../pages/BoardDetail';
 import BoardWrite from '../pages/BoardWrite';
 import Portfolio from '../pages/Portfolio';
 import ProjectList from '../pages/ProjectList';
@@ -15,7 +15,7 @@ const AppRouter = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/boards" element={<BoardList />} />
-    <Route path="/board/:id" element={<Detail />} />
+    <Route path="/board/:no" element={<BoardDetail />} />
     <Route path="/write" element={<BoardWrite />} />
     <Route path="/edit/:id" element={<BoardWrite />} />
     <Route path="/login" element={<Login />} />
