@@ -16,7 +16,7 @@ const ProjectDetail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50 py-12 px-6">
+    <div className="min-h-screen bg-primary-50 py-12 px-6">
       <div className="max-w-3xl mx-auto bg-white p-8 rounded-lg shadow-md">
         
         {/* 제목 */}
@@ -95,8 +95,8 @@ const ProjectDetail = () => {
 
         {/* 돌아가기 */}
         <div className="mt-8">
-          <Link to="/portfolio" className="text-indigo-600 hover:underline">
-            ← 포트폴리오 목록으로 돌아가기
+          <Link to="/project" className="text-indigo-600 hover:underline">
+            ← 프로젝트 목록으로 돌아가기
           </Link>
         </div>
       </div>
