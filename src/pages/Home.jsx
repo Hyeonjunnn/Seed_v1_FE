@@ -18,7 +18,7 @@ const Home = () => {
       </header>
 
       {/* 자기소개 섹션 */}
-      <section className="py-20 px-6 max-w-4xl mx-auto">
+      {/* <section className="py-20 px-6 max-w-4xl mx-auto">
         <h2 className="text-3xl font-semibold mb-6 text-primary-700">안녕하세요, 저는 송현준입니다.</h2>
         <p className="text-lg leading-relaxed">
           저는 웹 개발자이며, 백엔드와 프론트엔드를 넘나들며<br />
@@ -26,7 +26,7 @@ const Home = () => {
           Java, Spring Boot, React를 주로 사용하고 있으며,<br />
           팀 협업과 클린 코드에 가치를 두고 있습니다.
         </p>
-      </section>
+      </section> */}
 
       {/* 기술 스택 - 슬라이드 효과 + 아이콘 */}
       <section className="bg-primary-100 py-20 px-6 overflow-hidden">

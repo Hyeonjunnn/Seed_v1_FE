@@ -36,6 +36,9 @@ import {
     SiRender,
     SiGunicorn,
     SiFlask,
+    SiJquery,
+    SiHelm,
+    SiSonarqube,
 } from 'react-icons/si';
 
 export const techIcons = {
@@ -70,6 +73,9 @@ export const techIcons = {
     Render: SiRender,
     Flask: SiFlask,
     Gunicorn: SiGunicorn,
+    Jquery: SiJquery,
+    Helm: SiHelm,
+    Sonarqube: SiSonarqube
 };
 
 export const contactIcons = {
@@ -108,4 +114,7 @@ export const brandColors = {
     Jenkins: '#D24939',
     Vercel: '#000000',
     Render: '#46E3B7',
+    Jquery: '#0769AD',
+    Helm: '#0F1689',
+    Sonarqube: '#4E9BCD'
 };
