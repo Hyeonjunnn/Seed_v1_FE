@@ -130,7 +130,7 @@ export const projects = [
     no: 5,
     name: '생성형 LLM 기반 AI 여행 일정 추천 서비스',
     type: '팀 프로젝트(공모전)',
-    period: '2025.06 ~ 진행 중',
+    period: '2025.07 ~ 진행 중',
     team: '프론트엔드 2명, 백엔드 2명, AI 1명',
     role: '백엔드 API 개발, K-PaaS CI/CD 클라우드 배포',
     description: '사용자가 입력한 여행 정보를 바탕으로 AI가 추천하는 여행 일정 서비스',
@@ -153,10 +153,9 @@ export const projects = [
         'CI/CD': ['K-PaaS(NHN Cloud:nks)', 'GithubActions', 'Docker'],
         Communication: ['Github', 'Notion', 'Figma', 'Discord']
     },
-    image: '/images/seed-home.png',
+    image: '/images/hanbando-home.png',
         images: [
-            '/images/seed-project.png',
-            '/images/seed-portfolio.png'
+            '/images/hanbando-signup.png'
         ],
     },
     {

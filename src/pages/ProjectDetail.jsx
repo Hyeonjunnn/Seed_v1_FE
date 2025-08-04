@@ -31,6 +31,13 @@ const ProjectDetail = () => {
         {/* 제목 */}
         <h1 className="text-3xl font-bold text-gray-900 mb-4">{project.name}</h1>
 
+        {/* 프로젝트 유형 */}
+        {project.type && (
+          <h4 className="text-sm font-medium text-indigo-500 mb-4">
+            {project.type}
+          </h4>
+        )}
+        
         {/* 설명 */}
         <p className="text-gray-700 mb-6">{project.description}</p>
 

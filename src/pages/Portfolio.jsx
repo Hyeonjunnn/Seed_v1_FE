@@ -9,15 +9,15 @@ import ContactSection from '../components/ContactSection';
 
 const Portfolio = () => {
   return (
-    <div className="bg-primary-50 min-h-screen">
-      <HeroSection />
-      <AboutMe />
-      <ProfileSection />
-      <CertificationsSection />
-      <SkillsSection />
-      <ProjectsSection />
-      <ContactSection />
-    </div>
+  <div className="bg-primary-50 min-h-screen">
+    <section className="print-section"><HeroSection /></section>
+    <section className="print-section"><AboutMe /></section>
+    <section className="print-section"><ProfileSection /></section>
+    <section className="print-section"><CertificationsSection /></section>
+    <section className="print-section"><SkillsSection /></section>
+    <section className="print-section"><ProjectsSection /></section>
+    <section className="print-section"><ContactSection /></section>
+  </div>
   );
 };
 

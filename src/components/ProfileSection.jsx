@@ -28,14 +28,14 @@ const ProfileSection = () => {
   ];
 
   return (
-    <section className="py-20 px-6 bg-white">
+    <section className="py-12 px-6 bg-white">
       <div className="max-w-4xl mx-auto">
         <h2 className="text-3xl font-semibold mb-10 text-gray-700 text-center">
           인적 사항 & 학력
         </h2>
 
         {/* 기본 인적 정보 */}
-        <div className="mb-12">
+        <div className="mb-8">
           <h3 className="text-2xl font-bold mb-4 text-gray-900">기본 정보</h3>
           <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {basicInfo.map((info, idx) => (
@@ -48,7 +48,7 @@ const ProfileSection = () => {
         </div>
 
         {/* 학력 사항 */}
-        <div className="mb-12">
+        <div className="mb-8">
           <h3 className="text-2xl font-bold mb-4 text-gray-900">학력 사항</h3>
           <ul className="space-y-4">
             {education.map((edu, idx) => (
@@ -63,7 +63,7 @@ const ProfileSection = () => {
         </div>
 
         {/* 교육 사항 */}
-        <div>
+        <div className="mb-8">
           <h3 className="text-2xl font-bold mb-4 text-gray-900">교육 사항</h3>
           <ul className="space-y-4">
             {trainings.map((training, idx) => (

@@ -1,0 +1,32 @@
+/* print.css */
+@media print {
+    /* A4 가로 방향 */
+    @page {
+      size: A4 landscape;
+      margin: 10mm;
+    }
+  
+    /* 각 섹션을 페이지 안에서 분리되지 않고, 각 섹션마다 새 페이지 시작 */
+    section {
+      page-break-before: always; /* 각 섹션이 새 페이지에서 시작 */
+      page-break-inside: avoid;  /* 섹션 내 페이지 나눔 방지 */
+      break-before: page;        /* 최신 브라우저 대응 */
+      break-inside: avoid;
+    }
+  
+    /* 첫 번째 섹션은 새 페이지 시작 안 하도록 조정 */
+    section:first-child {
+      page-break-before: auto;
+      break-before: auto;
+    }
+  
+    /* 화면 UI 요소 숨기기 */
+    .no-print {
+      display: none !important;
+    }
+  
+    /* HTML 구조 안의 header/footer 숨기기 */
+    header, footer {
+      display: none !important;
+    }
+  }  
