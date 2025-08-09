@@ -19,8 +19,8 @@ export const projects = [
         Frontend: ['JSP', 'JavaScript', 'Jquery'],
         Backend: ['eGovFrame', 'Spring', 'Java'],
         Database: ['MS-SQL'],
-        'CI/CD': [],
-        Communication: ['GitLab']
+        'CI/CD': ['GitLab'],
+        Communication: []
     }
     },
     {
@@ -48,8 +48,8 @@ export const projects = [
         Frontend: ['Vuejs', 'JavaScript'],
         Backend: ['Spring Boot', 'Java'],
         Database: ['Mariadb', 'Redis'],
-        'CI/CD': ['Jenkins', 'Docker'],
-        Communication: ['Github', 'Discord']
+        'CI/CD': ['Jenkins', 'Docker', 'Github'],
+        Communication: ['Discord']
     },
     image: '/images/moyobom-architecture.png',
         images: [
@@ -83,8 +83,8 @@ export const projects = [
         Frontend: [],
         Backend: ['Spring Boot', 'Java'],
         Database: ['Mariadb', 'Redis'],
-        'CI/CD': ['Jenkins', 'Docker', 'Kubernetes', 'Argo', 'Helm', 'Sonarqube'],
-        Communication: ['Github', 'Notion', 'Discord']
+        'CI/CD': ['Jenkins', 'Docker', 'Kubernetes', 'Argo', 'Helm', 'Sonarqube', 'Github'],
+        Communication: ['Notion', 'Discord']
     },
     image: '/images/aesopwow-k8s.png',
         images: [
@@ -114,8 +114,8 @@ export const projects = [
         Frontend: ['React', 'Tailwind CSS'],
         Backend: ['Spring Boot', 'Java', 'Flask', 'Python'],
         Database: ['Mariadb', 'Redis'],
-        'CI/CD': ['GithubActions', 'Docker'],
-        Communication: ['Github', 'Notion', 'Figma', 'Discord']
+        'CI/CD': ['GithubActions', 'Docker', 'Github'],
+        Communication: ['Notion', 'Figma', 'Discord']
     },
     image: '/images/dagudok-home.png',
         images: [
@@ -146,8 +146,8 @@ export const projects = [
         Frontend: ['React', 'Tailwind CSS'],
         Backend: ['Spring Boot', 'Java', 'Flask', 'Python'],
         Database: ['Mariadb', 'Redis'],
-        'CI/CD': ['K-PaaS(NHN Cloud:nks)', 'GithubActions', 'Docker'],
-        Communication: ['Github', 'Notion', 'Figma', 'Discord']
+        'CI/CD': ['K-PaaS(NHN Cloud:nks)', 'GithubActions', 'Docker', 'Github'],
+        Communication: ['Notion', 'Figma', 'Discord']
     },
     image: '/images/hanbando-home.png',
         images: [
@@ -179,8 +179,8 @@ export const projects = [
         Frontend: ['Vercel', 'React', 'Tailwind CSS'],
         Backend: ['Render', 'Spring Boot', 'Java'],
         Database: ['PostgreSQL', 'Redis'],
-        'CI/CD': ['Docker'],
-        Communication: ['Github']
+        'CI/CD': ['Docker', 'Github'],
+        Communication: ['Notion']
     },
     image: '/images/seed-home.png',
         images: [

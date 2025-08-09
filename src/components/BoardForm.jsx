@@ -15,7 +15,7 @@ const BoardForm = ({ initialData = {}, onSubmit, onCancel, isLoading }) => {
 
   const { data: categories, isLoading: isCategoryLoading } = useQuery({
     queryKey: ['boardCategories'],
-    queryFn: fetchBoardCategories,
+    queryFn: () => fetchBoardCategories('POST'),
   });
 
   useEffect(() => {

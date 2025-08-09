@@ -23,7 +23,7 @@ const BoardList = () => {
   // 카테고리 목록 가져오기
   const { data: categories, isLoading: isCategoryLoading } = useQuery({
     queryKey: ['boardCategories'],
-    queryFn: fetchBoardCategories,
+    queryFn: () => fetchBoardCategories('GET'),
   });
 
   // 게시글 목록 가져오기
