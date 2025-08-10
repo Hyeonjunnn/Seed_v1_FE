@@ -1,10 +1,9 @@
 import { create } from 'zustand';
+import api from '../api/axiosInstance';
 
-// localStorage에서 초기값 불러오기
 const storedUser = localStorage.getItem('user');
 const initialUser = storedUser ? JSON.parse(storedUser) : null;
 
-// JWT 디코드 함수
 const decodeToken = (token) => {
   try {
     const base64Url = token.split('.')[1];
@@ -24,17 +23,20 @@ const decodeToken = (token) => {
 
 const useAuthStore = create((set, get) => ({
   user: initialUser,
+
   get isLoggedIn() {
     return !!get().user;
   },
 
   login: (userData) => {
-    const { accessToken } = userData;
+    const { accessToken, refreshToken } = userData;
     const decoded = decodeToken(accessToken);
 
     const updatedUser = {
       ...userData,
-      email: decoded?.email || null, // 토큰에서 이메일 추출
+      email: decoded?.email || null,
+      accessToken,
+      refreshToken,
     };
 
     localStorage.setItem('user', JSON.stringify(updatedUser));
@@ -44,6 +46,37 @@ const useAuthStore = create((set, get) => ({
   logout: () => {
     localStorage.removeItem('user');
     set({ user: null });
+  },
+
+  refreshAccessToken: async () => {
+    const { user } = get();
+    if (!user?.refreshToken) {
+      get().logout();
+      return null;
+    }
+
+    try {
+      const response = await api.post('/auth/refresh', {
+        refreshToken: user.refreshToken,
+      });
+      const { accessToken: newAccessToken, refreshToken: newRefreshToken } = response.data;
+      const decoded = decodeToken(newAccessToken);
+
+      const updatedUser = {
+        ...user,
+        accessToken: newAccessToken,
+        refreshToken: newRefreshToken,
+        email: decoded?.email || user.email,
+      };
+
+      localStorage.setItem('user', JSON.stringify(updatedUser));
+      set({ user: updatedUser });
+      return newAccessToken;
+    } catch (error) {
+      console.error('Failed to refresh token:', error);
+      get().logout();
+      return null;
+    }
   },
 }));
 

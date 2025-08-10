@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
 
 const Header = () => {
-  const { user, logout } = useAuthStore();
+  const { user } = useAuthStore();
   const isLoggedIn = !!user;
   const userName = user?.userName || '';
   const location = useLocation();
@@ -46,12 +46,12 @@ const Header = () => {
             <>
               <li className="text-primary-600 font-semibold">{userName}</li>
               <li>
-                <button
-                  onClick={logout}
+                <Link
+                  to="/logout"
                   className="hover:text-primary-600 transition-colors bg-transparent border-none cursor-pointer"
                 >
                   로그아웃
-                </button>
+                </Link>
               </li>
             </>
           ) : (
