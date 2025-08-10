@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { fetchProject } from '../api/projectApi';
 import { fetchTechCategories } from '../api/techCategoryApi';
 import { techIcons, brandColors } from '../utils/techIcons';
@@ -7,31 +8,26 @@ import GlobalLoading from '../components/GlobalLoading';
 
 const ProjectDetail = () => {
   const { no } = useParams();
-  const [project, setProject] = useState(null);
-  const [techCategories, setTechCategories] = useState([]);
-  const [error, setError] = useState(null);
 
-  const initialMainImage = project
-    ? project.image || (project.images && project.images.length > 0 ? project.images[0] : null)
-    : null;
-  const [mainImage, setMainImage] = useState(initialMainImage);
+  const {
+    data: project,
+    isError: projectIsError,
+    isLoading: projectIsLoading,
+  } = useQuery({
+    queryKey: ['project', no],
+    queryFn: () => fetchProject(no),
+  });
 
-  useEffect(() => {
-    const loadData = async () => {
-      try {
-        const projectData = await fetchProject(no);
-        setProject(projectData);
+  const {
+    data: techCategories,
+    isError: techCatIsError,
+    isLoading: techCatIsLoading,
+  } = useQuery({
+    queryKey: ['techCategories'],
+    queryFn: fetchTechCategories,
+  });
 
-        const techCategoryData = await fetchTechCategories();
-        setTechCategories(techCategoryData);
-      } catch (err) {
-        setError('데이터를 불러오는 데 실패했습니다.');
-        console.error(err);
-      }
-    };
-
-    loadData();
-  }, [no]);
+  const [mainImage, setMainImage] = useState(null);
 
   useEffect(() => {
     if (project) {
@@ -41,17 +37,34 @@ const ProjectDetail = () => {
     }
   }, [project]);
 
-  if (error) return <div className="min-h-screen flex justify-center items-center text-red-600">{error}</div>;
-  if (!project) return <div className="min-h-screen flex justify-center items-center text-gray-600">프로젝트를 찾을 수 없습니다.</div>;
+  if (projectIsError || techCatIsError) {
+    return (
+      <div className="min-h-screen flex justify-center items-center text-red-600">
+        데이터 불러오는 데 실패했습니다.
+      </div>
+    );
+  }
+
+  if (projectIsLoading || techCatIsLoading) {
+    return <GlobalLoading />;
+  }
+
+  if (!project) {
+    return (
+      <div className="min-h-screen flex justify-center items-center text-gray-600">
+        프로젝트를 찾을 수 없습니다.
+      </div>
+    );
+  }
 
   const features = project.feature ? project.feature.split(',').map(f => f.trim()) : [];
-  const startedAtFormatted = project.startedAt ? new Date(project.startedAt).toLocaleDateString() : '정보 없음';
+  const startedAtFormatted = project.startedAt
+    ? new Date(project.startedAt).toLocaleDateString()
+    : '정보 없음';
   const endedAtFormatted = project.endedAt ? new Date(project.endedAt).toLocaleDateString() : '현재';
 
   return (
     <>
-      <GlobalLoading />
-
       <style>
         {`
           @media print {
@@ -89,14 +102,8 @@ const ProjectDetail = () => {
 
       <div className="min-h-screen bg-primary-50 py-12 px-6 print-container">
         <div className="max-w-[90%] mx-auto bg-white p-8 rounded-lg shadow-md content-wrapper">
-
-          {/* 본문: 왼쪽 - 제목 포함 프로젝트 내용, 오른쪽 - 기술 스택 */}
           <div className="grid grid-cols-[3fr_1fr] gap-10 print-sections">
-
-            {/* 왼쪽 영역: 제목 포함 */}
             <section className="project-content">
-
-              {/* 제목 */}
               <div className="mb-6">
                 <h1 className="text-4xl font-bold text-gray-900 mb-2">{project.name}</h1>
                 {project.type && (
@@ -104,7 +111,6 @@ const ProjectDetail = () => {
                 )}
               </div>
 
-              {/* 이미지 (제목 아래) */}
               {mainImage && (
                 <div className="mb-6 main-image">
                   <img
@@ -116,7 +122,6 @@ const ProjectDetail = () => {
                 </div>
               )}
 
-              {/* 썸네일 리스트 */}
               {(project.image || (project.images && project.images.length > 0)) && (
                 <div className="mb-6 flex gap-3 overflow-x-auto thumbnail-list no-print">
                   {project.image && (
@@ -144,13 +149,16 @@ const ProjectDetail = () => {
                 </div>
               )}
 
-              {/* 프로젝트 정보, 상세 설명, 주요 기능 등 */}
               <div className="project-info space-y-8">
                 <h2 className="text-2xl font-bold text-gray-900 border-b-2 border-primary-500 pb-2 mb-6">
                   프로젝트 정보
                 </h2>
 
                 <div className="text-gray-700 space-y-3 text-base leading-relaxed">
+                  <p>
+                    <strong className="font-semibold text-gray-800">요약:</strong>{' '}
+                    {project.summary || <span className="italic text-gray-400">정보 없음</span>}
+                  </p>
                   <p>
                     <strong className="font-semibold text-gray-800">활동 기간:</strong>{' '}
                     {startedAtFormatted} ~ {endedAtFormatted}
@@ -214,17 +222,17 @@ const ProjectDetail = () => {
               </div>
             </section>
 
-            {/* 오른쪽: 기술 스택 */}
             <section className="tech-stack">
               <h2 className="text-xl font-semibold text-gray-800 mb-6 border-b border-gray-300 pb-2">
                 기술 스택
               </h2>
               <div className="grid grid-cols-1 gap-6">
-                {techCategories.length > 0 ? (
+                {techCategories?.length > 0 ? (
                   techCategories.map(({ techCategoryName }) => {
-                    const techsInCategory = project.projectTechResponseDtos?.filter(
-                      t => t.techCategoryName === techCategoryName
-                    ) || [];
+                    const techsInCategory =
+                      project.projectTechResponseDtos?.filter(
+                        (t) => t.techCategoryName === techCategoryName
+                      ) || [];
 
                     return (
                       <div
