@@ -5,14 +5,15 @@ import Footer from './components/Footer';
 import AppRouter from './routes/AppRouter';
 import ScrollToTop from './components/ScrollToTop';
 import GlobalLoading from './components/GlobalLoading';
+import Alert from './components/Alert';
+import ConfirmDialog from './components/ConfirmDialog';
 
-// React Query 클라이언트 생성 (필요시 옵션 추가 가능)
 const queryClient = new QueryClient();
 
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col bg-gray-50">
+      <div className="min-h-screen flex flex-col bg-gray-50 relative">
         <Header />
         <ScrollToTop />
         <main className="flex-grow">
@@ -20,6 +21,8 @@ function App() {
         </main>
         <Footer />
         <GlobalLoading />
+        <Alert />
+        <ConfirmDialog />
       </div>
     </QueryClientProvider>
   );

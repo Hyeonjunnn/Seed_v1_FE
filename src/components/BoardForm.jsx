@@ -8,7 +8,7 @@ import timezone from 'dayjs/plugin/timezone';
 dayjs.extend(utc);
 dayjs.extend(timezone);
 
-const BoardForm = ({ initialData = {}, onSubmit, onCancel, isLoading }) => {
+const BoardForm = ({ initialData = {}, onSubmit, onCancel }) => {
   const [title, setTitle] = useState(initialData.title || '');
   const [content, setContent] = useState(initialData.content || '');
   const [selectedCategory, setSelectedCategory] = useState(initialData.boardCategoryNo || '');
@@ -104,12 +104,9 @@ const BoardForm = ({ initialData = {}, onSubmit, onCancel, isLoading }) => {
         )}
         <button
           type="submit"
-          disabled={isLoading}
-          className={`px-5 py-2 rounded-md text-white font-semibold transition ${
-            isLoading ? 'bg-gray-400 cursor-not-allowed' : 'bg-primary-600 hover:bg-primary-700'
-          }`}
+          className="px-5 py-2 rounded-md bg-primary-600 text-white font-semibold hover:bg-primary-700 transition"
         >
-          {isLoading ? '저장 중...' : '저장'}
+          저장
         </button>
       </div>
     </form>

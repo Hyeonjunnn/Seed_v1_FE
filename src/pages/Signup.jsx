@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { signup } from '../api/authApi';
+import useAlertStore from '../store/alertStore';
 
 const Signup = () => {
   const [email, setEmail] = useState('');
@@ -8,22 +9,23 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
   const navigate = useNavigate();
+  const showAlert = useAlertStore((state) => state.showAlert);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (password !== passwordConfirm) {
-      alert('비밀번호가 일치하지 않습니다.');
+      showAlert('비밀번호가 일치하지 않습니다.', 'error');
       return;
     }
 
     try {
       await signup({ email, name, password });
-      alert('회원가입 성공! 로그인 페이지로 이동합니다.');
+      showAlert('회원가입 성공! 로그인 페이지로 이동합니다.', 'success');
       navigate('/login');
     } catch (error) {
       console.error(error);
-      alert('회원가입 실패: ' + (error.response?.data?.message || error.message));
+      showAlert('회원가입 실패: ' + (error.response?.data?.message || error.message), 'error');
     }
   };
 

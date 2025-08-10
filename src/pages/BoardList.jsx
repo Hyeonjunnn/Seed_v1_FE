@@ -18,16 +18,16 @@ const BoardList = () => {
 
   const [boardTitle, setBoardTitle] = useState('');
   const [sort, setSort] = useState('boardNo,DESC');
-  const [selectedCategory, setSelectedCategory] = useState(1); // 기본값: 자유게시판(1)
+  const [selectedCategory, setSelectedCategory] = useState(1);
 
   // 카테고리 목록 가져오기
-  const { data: categories, isLoading: isCategoryLoading } = useQuery({
+  const { data: categories } = useQuery({
     queryKey: ['boardCategories'],
     queryFn: () => fetchBoardCategories('GET'),
   });
 
   // 게시글 목록 가져오기
-  const { data, isLoading, error } = useQuery({
+  const { data, error } = useQuery({
     queryKey: ['boards', boardTitle, sort, selectedCategory],
     queryFn: () => fetchBoards(0, 10, sort, selectedCategory, boardTitle),
     keepPreviousData: true,
@@ -54,23 +54,19 @@ const BoardList = () => {
 
         {/* 카테고리 필터 */}
         <div className="mb-6 flex flex-wrap gap-3 justify-center">
-          {isCategoryLoading ? (
-            <span className="text-gray-500">카테고리 불러오는 중...</span>
-          ) : (
-            categories?.map((category) => (
-              <button
-                key={category.boardCategoryNo}
-                onClick={() => setSelectedCategory(category.boardCategoryNo)}
-                className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-                  selectedCategory === category.boardCategoryNo
-                    ? 'bg-primary-600 text-white border-primary-600'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
-                }`}
-              >
-                {category.name}
-              </button>
-            ))
-          )}
+          {categories?.map((category) => (
+            <button
+              key={category.boardCategoryNo}
+              onClick={() => setSelectedCategory(category.boardCategoryNo)}
+              className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+                selectedCategory === category.boardCategoryNo
+                  ? 'bg-primary-600 text-white border-primary-600'
+                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+              }`}
+            >
+              {category.name}
+            </button>
+          ))}
         </div>
 
         {/* 검색 & 정렬 + 글쓰기 버튼 */}
@@ -117,9 +113,7 @@ const BoardList = () => {
         </div>
 
         {/* 게시글 목록 */}
-        {isLoading ? (
-          <div className="p-4 text-center text-gray-600">게시글 목록을 불러오는 중입니다...</div>
-        ) : error ? (
+        {error ? (
           <div className="p-4 text-center text-red-500">게시글 불러오기 중 오류가 발생했습니다.</div>
         ) : boards.length === 0 ? (
           <p className="text-center text-gray-500">등록된 게시글이 없습니다.</p>

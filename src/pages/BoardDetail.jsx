@@ -14,19 +14,11 @@ const BoardDetail = () => {
   const { no } = useParams();
   const { user } = useAuthStore();
 
-  const { data: board, isLoading, error } = useQuery({
+  const { data: board } = useQuery({
     queryKey: ['board', no],
     queryFn: () => fetchBoard(no),
     enabled: !!no,
   });
-
-  if (isLoading) {
-    return <div className="text-center py-10 text-gray-600">게시글 불러오는 중...</div>;
-  }
-
-  if (error) {
-    return <div className="text-center py-10 text-red-500">오류가 발생했습니다.</div>;
-  }
 
   if (!board) {
     return <div className="text-center py-10 text-gray-600">게시글이 없습니다.</div>;

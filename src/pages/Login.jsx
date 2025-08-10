@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import useAuthStore from '../store/authStore';
-import { login as loginApi } from '../api/authApi'; // 실제 API 함수 import
+import { login as loginApi } from '../api/authApi';
+import useAlertStore from '../store/alertStore'; // Zustand alertStore 사용
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -9,6 +10,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const login = useAuthStore((state) => state.login);
+  const showAlert = useAlertStore((state) => state.showAlert);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -16,12 +18,12 @@ const Login = () => {
     try {
       const userData = await loginApi({ email, password });
 
-      login(userData);  // 여기서 login 함수 호출
+      login(userData);
 
-      alert(`로그인 성공: ${userData.userName}님 환영합니다!`);
+      showAlert(`로그인 성공: ${userData.userName}님 환영합니다!`, 'success');
       navigate('/');
     } catch (error) {
-      alert('로그인 실패: ' + (error.response?.data?.message || '다시 시도해주세요.'));
+      showAlert('로그인 실패: ' + (error.response?.data?.message || '다시 시도해주세요.'), 'error');
     }
   };
 
