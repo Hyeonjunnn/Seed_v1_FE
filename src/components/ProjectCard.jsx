@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import { techIcons, brandColors } from '../utils/techIcons';
 
 const ProjectCard = ({ project }) => {
-  const techStack = Object.values(project.techCategories || {}).flat();
+  const techStack = (project.projectTechResponseDtos || []).map(item => item.techName);
 
   return (
     <Link
-      to={`/project/${project.no}`}
+      to={`/project/${project.projectNo}`}
       className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg hover:scale-105 transition-transform flex flex-col cursor-pointer"
     >
       {/* 제목 */}
@@ -15,13 +15,11 @@ const ProjectCard = ({ project }) => {
 
       {/* 프로젝트 유형 */}
       {project.type && (
-        <h4 className="text-sm font-medium text-indigo-500 mb-3">
-          {project.type}
-        </h4>
+        <h4 className="text-sm font-medium text-indigo-500 mb-3">{project.type}</h4>
       )}
 
       {/* 설명 */}
-      <p className="text-gray-600 mb-4 line-clamp-3">{project.description}</p>
+      <p className="text-gray-600 mb-4 line-clamp-3">{project.description || project.summary}</p>
 
       {/* 기술 스택 */}
       <div className="flex items-center gap-2 mb-4 flex-wrap">

@@ -1,4 +1,3 @@
-// src/components/GlobalLoading.jsx
 import React from 'react';
 import { useIsFetching } from '@tanstack/react-query';
 
