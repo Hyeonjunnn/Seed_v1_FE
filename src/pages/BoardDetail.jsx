@@ -57,7 +57,9 @@ const BoardDetail = () => {
         </div>
 
         {/* 본문 */}
-        <div className="text-gray-700 leading-relaxed mb-8">{board.content}</div>
+        <div className="text-gray-700 leading-relaxed mb-8 whitespace-pre-line">
+          {board.content}
+        </div>
 
         {/* 버튼 영역 */}
         <div className="flex justify-between border-t pt-6">

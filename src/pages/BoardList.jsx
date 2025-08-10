@@ -128,14 +128,21 @@ const BoardList = () => {
             {boards.map((board) => (
               <li
                 key={board.boardNo}
-                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition cursor-pointer"
+                className="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition cursor-pointer flex flex-col"
                 onClick={() => navigate(`/board/${board.boardNo}`)}
               >
+                {/* 제목 */}
                 <h3 className="text-primary-700 font-semibold text-xl mb-3">
                   {board.title}
                 </h3>
-                <p className="text-gray-600 line-clamp-2 mb-4">{board.content}</p>
-                <div className="text-gray-500 flex justify-between text-sm">
+
+                {/* 본문 */}
+                <p className="text-gray-600 line-clamp-2 mb-4 flex-grow">
+                  {board.content}
+                </p>
+
+                {/* 생성자 & 생성일 (항상 하단 고정) */}
+                <div className="text-gray-500 flex justify-between text-sm mt-auto">
                   <span>{board.userName}</span>
                   <span>{formatDate(board.createdAt)}</span>
                 </div>
