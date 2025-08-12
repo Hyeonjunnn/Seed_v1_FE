@@ -12,15 +12,24 @@ const ProfileSection = () => {
       label: '이메일', 
       value: 'dev_sklg0602@naver.com', 
       icon: <HiOutlineMail className="text-primary-600 w-5 h-5" />,
-      isEmail: true
+      isCopyable: true,
+      copyLabel: '이메일 주소 복사',
+      alertMessage: '이메일이 복사되었습니다!',
     },
-    { label: '전화번호', value: '010-2044-7585', icon: <HiOutlinePhone className="text-primary-600 w-5 h-5" /> },
+    { 
+      label: '전화번호', 
+      value: '010-2044-7585', 
+      icon: <HiOutlinePhone className="text-primary-600 w-5 h-5" />,
+      isCopyable: true,
+      copyLabel: '전화번호 복사',
+      alertMessage: '전화번호가 복사되었습니다!',
+    },
     { label: '주소', value: '서울특별시 마포구', icon: <HiOutlineLocationMarker className="text-primary-600 w-5 h-5" /> },
   ];
 
-  const copyToClipboard = (text) => {
+  const copyToClipboard = (text, message) => {
     navigator.clipboard.writeText(text).then(() => {
-      showAlert('이메일이 복사되었습니다!', 'success');
+      showAlert(message, 'success');
     });
   };
 
@@ -63,15 +72,15 @@ const ProfileSection = () => {
                 <div className="flex items-center justify-center w-10 h-10 bg-primary-100 rounded-full">
                   {info.icon}
                 </div>
-                <div className={`flex items-center w-full ${info.isEmail ? 'justify-between' : ''}`}>
+                <div className={`flex items-center w-full ${info.isCopyable ? 'justify-between' : ''}`}>
                   <div className="flex items-center gap-2">
                     <p className="font-semibold text-primary-700 text-lg">{info.label}</p>
                     <p className="text-gray-700 text-base">{info.value}</p>
                   </div>
-                  {info.isEmail && (
+                  {info.isCopyable && (
                     <button
-                      onClick={() => copyToClipboard(info.value)}
-                      title="이메일 주소 복사"
+                      onClick={() => copyToClipboard(info.value, info.alertMessage)}
+                      title={info.copyLabel}
                       className="p-1 rounded hover:bg-primary-200 transition flex-shrink-0"
                     >
                       <HiOutlineClipboard className="w-5 h-5 text-primary-600" />
