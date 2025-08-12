@@ -20,13 +20,11 @@ const BoardList = () => {
   const [sort, setSort] = useState('boardNo,DESC');
   const [selectedCategory, setSelectedCategory] = useState(1);
 
-  // 카테고리 목록 가져오기
   const { data: categories } = useQuery({
     queryKey: ['boardCategories'],
     queryFn: () => fetchBoardCategories('GET'),
   });
 
-  // 게시글 목록 가져오기
   const { data, error } = useQuery({
     queryKey: ['boards', boardTitle, sort, selectedCategory],
     queryFn: () => fetchBoards(0, 10, sort, selectedCategory, boardTitle),
@@ -54,19 +52,22 @@ const BoardList = () => {
 
         {/* 카테고리 필터 */}
         <div className="mb-6 flex flex-wrap gap-3 justify-center">
-          {categories?.map((category) => (
-            <button
-              key={category.boardCategoryNo}
-              onClick={() => setSelectedCategory(category.boardCategoryNo)}
-              className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
-                selectedCategory === category.boardCategoryNo
-                  ? 'bg-primary-600 text-white border-primary-600'
-                  : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
-              }`}
-            >
-              {category.name}
-            </button>
-          ))}
+          {categories
+            ?.slice()
+            .sort((a, b) => a.boardCategoryNo - b.boardCategoryNo)
+            .map((category) => (
+              <button
+                key={category.boardCategoryNo}
+                onClick={() => setSelectedCategory(category.boardCategoryNo)}
+                className={`px-4 py-2 rounded-full text-sm font-medium border transition ${
+                  selectedCategory === category.boardCategoryNo
+                    ? 'bg-primary-600 text-white border-primary-600'
+                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
+                }`}
+              >
+                {category.name}
+              </button>
+            ))}
         </div>
 
         {/* 검색 & 정렬 + 글쓰기 버튼 */}
