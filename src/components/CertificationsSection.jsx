@@ -25,22 +25,28 @@ const certifications = [
 
 const CertificationsSection = () => {
   return (
-    <section className="py-20 px-6 max-w-4xl mx-auto">
-      <h2 className="text-3xl font-semibold mb-8 text-gray-700 text-center">자격증</h2>
-      <ul className="space-y-6">
-        {certifications.map(({ name, institution, date }, idx) => (
-          <li
-            key={idx}
-            className="bg-white rounded-lg shadow p-6 flex flex-col sm:flex-row sm:justify-between sm:items-center"
-          >
-            <div>
-              <h3 className="text-xl font-semibold text-gray-900">{name}</h3>
-              <p className="text-gray-600">{institution}</p>
-            </div>
-            <span className="mt-3 sm:mt-0 text-primary-700 font-medium">{date}</span>
-          </li>
-        ))}
-      </ul>
+    <section className="min-h-screen py-20 px-6 bg-green-50">
+      <div className="max-w-4xl mx-auto">
+        <h2 className="text-4xl font-extrabold mb-12 text-gray-900 text-center tracking-wide drop-shadow-sm">
+          자격증
+        </h2>
+        <ul className="space-y-8">
+          {certifications.map(({ name, institution, date }, idx) => (
+            <li
+              key={idx}
+              className="bg-white p-6 rounded-xl shadow-lg border border-green-200 hover:shadow-green-300 transition-shadow flex flex-col sm:flex-row sm:justify-between sm:items-center"
+            >
+              <div>
+                <h3 className="text-2xl font-extrabold text-gray-900">{name}</h3>
+                <p className="text-gray-700 mt-1">{institution}</p>
+              </div>
+              <span className="mt-4 sm:mt-0 text-gray-900 font-semibold text-lg">
+                {date}
+              </span>
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 };

@@ -18,7 +18,7 @@ const HeroSection = () => {
         `}
       </style>
 
-      <section className="hero-section bg-gradient-to-br from-emerald-600 to-green-700 text-white py-32 px-6 text-center flex flex-col items-center justify-center">
+      <section className="min-h-screen hero-section bg-gradient-to-br from-emerald-600 to-green-700 text-white py-32 px-6 text-center flex flex-col items-center justify-center">
         {/* 포트폴리오 제목 */}
         <h1 className="text-6xl font-extrabold mb-4 tracking-tight">PORTFOLIO</h1>
 

@@ -35,6 +35,7 @@ const useAuthStore = create((set, get) => ({
     const updatedUser = {
       ...userData,
       email: decoded?.email || null,
+      role: decoded?.role || null,
       accessToken,
       refreshToken,
     };
@@ -66,6 +67,7 @@ const useAuthStore = create((set, get) => ({
         ...user,
         accessToken: newAccessToken,
         refreshToken: newRefreshToken,
+        role: decoded?.role || null,
         email: decoded?.email || user.email,
       };
 

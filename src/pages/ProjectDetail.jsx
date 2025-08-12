@@ -204,15 +204,24 @@ const ProjectDetail = () => {
                       {project.projectLinkResponseDtos.map(link => (
                         <li key={link.projectLinkNo} className="truncate max-w-[80vw]">
                           <strong className="text-gray-800">{link.title}:</strong>{' '}
-                          <a
-                            href={link.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-primary-600 hover:text-primary-700 hover:underline"
-                            title={link.link}
-                          >
-                            {link.link}
-                          </a>{' '}
+                          
+                          {link.statusContent === '중단' || link.statusContent === '비공개중' ? (
+                            <span className="text-gray-500 truncate" title={link.link}>
+                              {link.link}
+                            </span>
+                          ) : (
+                            <a
+                              href={link.link}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="text-primary-600 hover:text-primary-700 hover:underline"
+                              title={link.link}
+                            >
+                              {link.link}
+                            </a>
+                          )}
+                          
+                          {' '}
                           <span className="text-gray-500 text-sm">({link.statusContent})</span>
                         </li>
                       ))}
