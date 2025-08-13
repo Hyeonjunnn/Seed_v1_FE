@@ -20,23 +20,23 @@ const HeroSection = () => {
             body {
               -webkit-print-color-adjust: exact;
               print-color-adjust: exact;
-              position: relative;
             }
+
             .hero-section {
               background: #059669 !important;
               color: white !important;
+              position: relative; /* 절대 위치 기준 */
             }
+
             /* 인쇄 전용 페이지 하단 텍스트 */
             .print-footer {
               display: block; /* 인쇄 시 보이도록 */
-              position: fixed;
+              position: absolute; /* 섹션 기준 */
               bottom: 5mm;
-              right: 0;
-              padding: 2mm;
+              right: 5mm;
               font-size: 10pt;
               color: black;
               text-align: right;
-              width: 100%;
             }
           }
         `}
