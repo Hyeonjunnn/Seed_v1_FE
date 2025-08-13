@@ -31,43 +31,48 @@ const PrintProjectDetail = ({ project, techCategories }) => {
               padding-top: 5mm !important;
               margin-top: 0 !important;
             }
-            .no-print,
-            .main-image img,
-            .thumbnail-list {
-              display: none !important;
+
+            /* 그림자 제거 */
+            .hover\\:shadow-md,
+            .hover\\:shadow-lg,
+            .shadow-sm,
+            .shadow-md,
+            .shadow-lg {
+              box-shadow: none !important;
             }
-            .content-wrapper {
+
+            /* 프로젝트 및 기술 스택 섹션 */
+            .project-detail-section,
+            .tech-stack-section {
               max-width: 100% !important;
-              padding: 10mm !important;
-            }
-            /* 프로젝트 내용 섹션 */
-            .project-detail-section {
-              max-width: 90% !important;
-              margin: auto;
-              margin-bottom: 20mm !important; /* 섹션 아래 여백 추가 */
+              margin: auto !important;
+              margin-bottom: 20mm !important;
               background-color: white !important;
-              padding: 20mm !important;
-              border-radius: 8px;
-              box-shadow: 0 0 10px rgba(0,0,0,0.15);
+              padding: 15mm !important;
+              border-radius: 0 !important;
               page-break-after: always;
               display: flex;
               flex-direction: column;
-              justify-content: center;
+              justify-content: flex-start;
             }
-            /* 기술 스택 섹션 */
-            .tech-stack-section {
-              max-width: 90% !important;
-              margin: auto;
-              background-color: white !important;
-              padding: 20mm !important;
-              border-radius: 8px;
-              box-shadow: 0 0 10px rgba(0,0,0,0.15);
-              page-break-before: always;
-              display: flex;
-              flex-direction: column;
-              justify-content: center;
+
+            /* 링크 스타일: 밑줄 제거, 검정색, 줄바꿈 가능 */
+            a {
+              color: black !important;
+              text-decoration: none !important;
+              word-break: break-word !important;
             }
-            .tech-stack > h2 {
+
+            /* 기술 스택 카드 그림자 제거, 항상 보이도록 */
+            .tech-stack-section > div > div {
+              box-shadow: none !important;
+              background-color: #f9fafb !important; /* bg-gray-50 */
+            }
+
+            /* 화면용 요소 숨김 */
+            .no-print,
+            .main-image img,
+            .thumbnail-list {
               display: none !important;
             }
           }
@@ -78,7 +83,6 @@ const PrintProjectDetail = ({ project, techCategories }) => {
 
         {/* 프로젝트 내용 섹션 */}
         <section className="project-detail-section">
-
           {/* 프로젝트 제목 */}
           <div className="mb-6">
             <h1 className="text-4xl font-bold text-gray-900 mb-2">{project.name}</h1>
@@ -158,19 +162,15 @@ const PrintProjectDetail = ({ project, techCategories }) => {
                   </h3>
                   <ul className="list-disc list-inside space-y-1">
                     {project.projectLinkResponseDtos.map(link => (
-                      <li key={link.projectLinkNo} className="truncate max-w-[80vw]">
+                      <li key={link.projectLinkNo}>
                         <strong className="text-gray-800">{link.title}:</strong>{' '}
                         {link.statusContent === '중단' || link.statusContent === '비공개중' ? (
-                          <span className="text-gray-500 truncate" title={link.link}>
-                            {link.link}
-                          </span>
+                          <span className="text-gray-500">{link.link}</span>
                         ) : (
                           <a
                             href={link.link}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="text-primary-600 hover:text-primary-700 hover:underline"
-                            title={link.link}
                           >
                             {link.link}
                           </a>

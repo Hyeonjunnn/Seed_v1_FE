@@ -31,6 +31,24 @@ const SkillsSection = () => {
 
   return (
     <section className="min-h-screen bg-white py-10 px-6">
+      {/* 인쇄 시 그림자 제거 스타일 */}
+      <style>
+        {`
+          @media print {
+            .shadow, .shadow-md, .shadow-sm, .hover\\:shadow-lg {
+              box-shadow: none !important;
+            }
+            /* 카드 배경색 강제 흰색 */
+            .bg-white {
+              background-color: white !important;
+            }
+            .bg-gray-50 {
+              background-color: white !important;
+            }
+          }
+        `}
+      </style>
+
       <h2 className="text-4xl font-extrabold mb-12 text-gray-900 text-center tracking-wide drop-shadow-sm">
         기술 스택
       </h2>

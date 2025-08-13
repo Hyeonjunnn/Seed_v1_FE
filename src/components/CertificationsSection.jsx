@@ -26,6 +26,24 @@ const certifications = [
 const CertificationsSection = () => {
   return (
     <section className="min-h-screen py-20 px-6 bg-green-50">
+      {/* 인쇄 시 그림자 제거 스타일 */}
+      <style>
+        {`
+          @media print {
+            .shadow, .shadow-lg, .hover\\:shadow-green-300 {
+              box-shadow: none !important;
+            }
+            .hover\\:shadow:hover {
+              box-shadow: none !important;
+            }
+            /* 필요시 배경색을 흰색으로 강제 */
+            .bg-white {
+              background-color: white !important;
+            }
+          }
+        `}
+      </style>
+
       <div className="max-w-4xl mx-auto">
         <h2 className="text-4xl font-extrabold mb-12 text-gray-900 text-center tracking-wide drop-shadow-sm">
           자격증
