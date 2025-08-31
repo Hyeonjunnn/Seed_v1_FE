@@ -49,7 +49,7 @@ const BoardDetail = () => {
         </div>
 
         {/* 본문 */}
-        <div className="text-gray-700 leading-relaxed mb-8 whitespace-pre-line">
+        <div className="text-gray-700 leading-relaxed mb-8 whitespace-pre-wrap">
           {board.content}
         </div>
 
