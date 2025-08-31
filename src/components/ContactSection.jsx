@@ -4,7 +4,7 @@ import { contactIcons } from '../utils/techIcons';
 const ContactSection = () => {
   const EmailIcon = contactIcons.email;
   const GithubIcon = contactIcons.github;
-  const TistoryIcon = contactIcons.tistory;
+  const BlogIcon = contactIcons.blog;
 
   return (
     <section className="bg-white py-16 px-6 w-full">
@@ -25,10 +25,10 @@ const ContactSection = () => {
               link: 'https://github.com/Hyeonjunnn',
             },
             {
-              Icon: TistoryIcon,
-              label: 'Tistory',
-              value: 'hyeonjunnn.tistory.com',
-              link: 'https://hyeonjunnn.tistory.com',
+              Icon: BlogIcon,
+              label: 'Blog',
+              value: 'seed-v1.vercel.app/boards',
+              link: 'https://seed-v1.vercel.app/boards',
             },
           ].map(({ Icon, label, value, link }, index) => (
             <div key={index} className="flex items-center gap-4">

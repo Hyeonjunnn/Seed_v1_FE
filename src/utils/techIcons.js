@@ -1,5 +1,5 @@
 import { HiOutlineMail } from 'react-icons/hi';
-import { FaGithub, FaTumblr } from 'react-icons/fa';
+import { FaGithub, FaBlogger } from 'react-icons/fa';
 
 import {
     FaJava
@@ -81,7 +81,7 @@ export const techIcons = {
 export const contactIcons = {
     email: HiOutlineMail,
     github: FaGithub,
-    tistory: FaTumblr,
+    blog: FaBlogger,
 };
 
 export const brandColors = {
